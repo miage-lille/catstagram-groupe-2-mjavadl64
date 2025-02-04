@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store'; 
+import { counterSelector, decrement, increment  } from '../reducer';
 
 const Container = styled.div`
   padding: 16px;
@@ -33,7 +36,17 @@ const DisplayCounter = styled.span`
 `;
 
 const Counter = () => {
-  return null;
+  const counter = useSelector(counterSelector);
+  const dispatch = useDispatch();
+
+  return (
+    <Container>
+      {/* desacivate the button when the counter is less than 3 */}
+      <Button disabled={counter !== undefined && counter <= 3} onClick={() => dispatch(decrement())}> - </Button>
+      <DisplayCounter>{counter !== undefined && counter !== null ? counter : 0}</DisplayCounter>
+      <Button onClick={() => dispatch(increment())}> + </Button>
+    </Container>
+  );
 };
 
 export default Counter;
