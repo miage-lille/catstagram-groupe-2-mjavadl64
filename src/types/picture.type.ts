@@ -4,3 +4,5 @@ export type Picture = {
   author: string;
   largeFormat: string;
 };
+
+export type PictureList = Picture[];
